@@ -8,3 +8,26 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+table {
+    table-layout: auto;
+}
+
+th:first-of-type,
+td:first-of-type {
+    width: 20vw;
+}
+
+td {
+    white-space: pre-wrap;
+}
+
+td code {
+    word-wrap: break-all;
+    word-wrap: anywhere;
+}
+
+textarea {
+    min-width: 40vw;
+    height: 100%;
+}

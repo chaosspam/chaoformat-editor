@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container } from 'reactstrap';
 
 import FileUploader from './components/FileUploader';
+import LangTable from './components/LangTable';
 import { LangFile, LangObject } from './types/langFile';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     const onChangeFile: React.ChangeEventHandler<HTMLInputElement> = event => {
         setIsFileInvalid(false);
         const fileReader = new FileReader();
-        fileReader.onloadend = _ => {
+        fileReader.onloadend = () => {
             const content = fileReader.result as string;
             try {
                 const parsed = JSON.parse(content);
@@ -34,6 +35,7 @@ function App() {
         <Container fluid className="mt-2">
             <h1 className="mb-4">ChaoFormat Language File Editor</h1>
             <FileUploader onChangeFile={onChangeFile} isFileInvalid={isFileInvalid} />
+            <LangTable langFile={langFile} />
         </Container>
     );
 }
