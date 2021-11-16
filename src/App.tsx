@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Container } from 'reactstrap';
+import { Button, Col, Container, Row } from 'reactstrap';
 
 import FileUploader from './components/FileUploader';
 import LangTable from './components/LangTable';
 import { LangFile, LangObject } from './types/langFile';
 
 function App() {
-    const [langFile, setLangFile] = useState<LangFile>({items: new Array<LangObject>()});
+    const [langFile, setLangFile] = useState<LangFile>({items: []});
     const [isFileInvalid, setIsFileInvalid] = useState(false);
 
     const onChangeFile: React.ChangeEventHandler<HTMLInputElement> = event => {
@@ -34,7 +34,14 @@ function App() {
     return (
         <Container fluid className="mt-2">
             <h1 className="mb-4">ChaoFormat Language File Editor</h1>
-            <FileUploader onChangeFile={onChangeFile} isFileInvalid={isFileInvalid} />
+            <Row>
+                <Col sm="10">
+                    <FileUploader onChangeFile={onChangeFile} isFileInvalid={isFileInvalid} />
+                </Col>
+                <Col>
+                    <Button color="success" block>Save Changes</Button>
+                </Col>
+            </Row>
             <LangTable langFile={langFile} />
         </Container>
     );

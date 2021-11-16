@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
 import { Input } from "reactstrap";
-import { LangObject } from "../types/langFile";
 
 interface LangTableProps {
-    item: LangObject
+    itemKey: string,
+    originalValue: string,
+    editedValue: string,
+    onChangeValue: React.ChangeEventHandler<HTMLInputElement>
 }
 
-function LangTableRow({item} : LangTableProps) {
-    const [itemValue, setItemValue] = useState(item.value);
-    useEffect(() => {
-        setItemValue(item.value);
-    }, [item]);
-
+function LangTableRow({itemKey, originalValue, editedValue, onChangeValue} : LangTableProps) {
     return (
         <tr>
-            <td><code>{item.key}</code></td>
-            <td>{item.value}</td>
+            <td><code>{itemKey}</code></td>
+            <td>{originalValue}</td>
             <td>
-                <Input type="textarea" value={itemValue} />
+                <Input type="textarea" value={editedValue} onChange={onChangeValue} />
             </td>
         </tr>
     );
