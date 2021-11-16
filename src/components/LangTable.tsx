@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Table } from 'reactstrap';
 import { LangFile, LangObject } from '../types/langFile';
 import LangTableRow from './LangTableRow';
 
 interface LangTableProps {
-    langFile: LangFile
+    langFile: LangFile,
+    editedFile: LangFile,
+    updateEditedItems: (index: number, event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-function LangTable({langFile} : LangTableProps) {
-    const [editedFile, setEditedFile] = useState<Array<LangObject>>([]);
-    useEffect(() => {
-        setEditedFile(Array.from(langFile.items));
-    }, [langFile]);
-    const updateEditedItems = (index : number, event : React.ChangeEvent<HTMLInputElement>) => {
-        // really silly way to do a deep clone of array of objects
-        const copy = JSON.parse(JSON.stringify(editedFile));
-        copy[index].value = event.target.value;
-        setEditedFile(copy);
-    };
+function LangTable({langFile, editedFile, updateEditedItems} : LangTableProps) {
 
-    const rows = editedFile.map(
+    const rows = editedFile.items.map(
         (langItem, index) => <LangTableRow key={index} itemKey={langItem.key}
                                 originalValue={langFile.items[index].value}
                                 editedValue={langItem.value}
