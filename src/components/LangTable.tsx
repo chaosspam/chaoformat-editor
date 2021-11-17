@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import { LangFile, LangObject } from '../types/langFile';
+import { LangFile } from '../types/langFile';
 import LangTableRow from './LangTableRow';
 
 interface LangTableProps {
