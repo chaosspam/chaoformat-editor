@@ -6,16 +6,16 @@ import LangTableRow from './LangTableRow';
 interface LangTableProps {
     langFile: LangFile,
     editedFile: LangFile,
-    updateEditedItems: (index: number, event: React.ChangeEvent<HTMLInputElement>) => void
+    updateEditedItems: (id: string, event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function LangTable({langFile, editedFile, updateEditedItems} : LangTableProps) {
-
-    const rows = editedFile.items.map(
-        (langItem, index) => <LangTableRow key={index} itemKey={langItem.key}
-                                originalValue={langFile.items[index].value}
-                                editedValue={langItem.value}
-                                onChangeValue={event => updateEditedItems(index, event)} />
+    // Sort keys
+    const rows = Object.keys(editedFile).sort().map(
+        (itemKey, index) => <LangTableRow key={index} itemKey={itemKey}
+                                originalValue={langFile[itemKey]}
+                                editedValue={editedFile[itemKey]}
+                                onChangeValue={event => updateEditedItems(itemKey, event)} />
     );
 
     return (

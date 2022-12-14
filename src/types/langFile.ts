@@ -4,5 +4,5 @@ export interface LangObject {
 }
 
 export interface LangFile {
-    items: Array<LangObject>
+    [key: string]: string
 }
